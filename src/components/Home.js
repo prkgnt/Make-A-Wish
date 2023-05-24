@@ -1,7 +1,10 @@
 import React from "react";
+import styled from "styled-components";
+
+const Container = styled.div``;
 
 const Home = () => {
-  return <div>Home</div>;
+  return <Container>Home</Container>;
 };
 
 export default Home;

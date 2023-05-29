@@ -25,7 +25,9 @@ const Auth = () => {
     }
   };
 
-  const onSubmit = () => {
+  const onSubmit = (event) => {
+    event.preventDefault();
+
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);

@@ -34,10 +34,12 @@ const User = () => {
     const querySnapshot = await getDocs(collection(db, "availableID"));
     querySnapshot.forEach((doc) => {
       if (linkId === doc.data().linkId) {
+        console.log(linkId);
         setUserId(doc.data().userId);
         setAvailableLink(true);
+        console.log(availableLink);
       } else {
-        setAvailableLink(false);
+        //setAvailableLink(false);
       }
     });
   };

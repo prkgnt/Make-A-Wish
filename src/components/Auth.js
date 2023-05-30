@@ -56,6 +56,7 @@ const Auth = () => {
           value={password}
           onChange={onChange}
         />
+
         <SubmitBtn type="submit" value="Log-in" />
       </form>
       <Link to="signUp">create new account</Link>

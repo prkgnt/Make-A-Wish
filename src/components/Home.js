@@ -20,9 +20,10 @@ const Home = ({ userObj }) => {
   const [loading, setLoading] = useState(true);
   const [isUserLink, setIsUserLink] = useState(false);
   const [contents, setContents] = useState();
+  const [birthDay, setBirthDay] = useState();
+
   const checkUserLink = async () => {
     const querySnapshot = await getDocs(collection(db, "availableID"));
-
     querySnapshot.forEach((doc) => {
       if (userObj.uid === doc.data().userId) {
         setIsUserLink(true);
@@ -31,14 +32,16 @@ const Home = ({ userObj }) => {
   };
 
   const makeLink = async () => {
+    const v4 = uuidv4();
     if (isUserLink) {
       console.log("alreay exist");
     } else {
       const docRef = await addDoc(collection(db, "availableID"), {
         userId: userObj.uid,
-        linkId: uuidv4(),
+        linkId: v4,
       });
     }
+    console.log(`localhost:3000/user/${v4}`);
   };
 
   const getMessages = async () => {
@@ -55,9 +58,17 @@ const Home = ({ userObj }) => {
     //console.log(contents);
   };
 
+  const getBirthDay = async () => {
+    const birthDayRef = await collection(db, "birthDay");
+    const q = await query(birthDayRef, where("userId", "==", userObj.uid));
+    const querySnapshot = await getDocs(q);
+    setBirthDay(querySnapshot.docs[0].data().birthDay);
+  };
+
   useEffect(() => {
     checkUserLink();
     getMessages();
+    getBirthDay();
     setLoading(false);
   }, []);
 
@@ -65,6 +76,8 @@ const Home = ({ userObj }) => {
     <div>loading...</div>
   ) : (
     <Container>
+      <div>{userObj.displayName}</div>
+      <div>{birthDay}</div>
       <button onClick={makeLink}>make link</button>
       <button
         onClick={() => {

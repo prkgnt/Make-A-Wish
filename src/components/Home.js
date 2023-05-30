@@ -19,7 +19,7 @@ const Home = ({ userObj }) => {
   const db = getFirestore(app);
   const [loading, setLoading] = useState(true);
   const [isUserLink, setIsUserLink] = useState(false);
-
+  const [contents, setContents] = useState();
   const checkUserLink = async () => {
     const querySnapshot = await getDocs(collection(db, "availableID"));
 
@@ -45,9 +45,14 @@ const Home = ({ userObj }) => {
     const messagesRef = await collection(db, "messages");
     const q = await query(messagesRef, where("userId", "==", userObj.uid));
     const querySnapshot = await getDocs(q);
+
+    const queryArray = [];
     querySnapshot.forEach((doc) => {
-      console.log(doc.data());
+      queryArray.push(doc.data());
     });
+    //console.log(queryArray);
+    setContents(queryArray);
+    //console.log(contents);
   };
 
   useEffect(() => {
@@ -68,6 +73,14 @@ const Home = ({ userObj }) => {
       >
         LogOut
       </button>
+      <div>
+        {contents &&
+          contents.map((data, index) => (
+            <div key={index}>
+              {data.name} / {data.content}
+            </div>
+          ))}
+      </div>
     </Container>
   );
 };

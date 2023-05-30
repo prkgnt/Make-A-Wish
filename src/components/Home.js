@@ -19,8 +19,9 @@ const Home = ({ userObj }) => {
   const db = getFirestore(app);
   const [loading, setLoading] = useState(true);
   const [isUserLink, setIsUserLink] = useState(false);
-  const [contents, setContents] = useState();
-  const [birthDay, setBirthDay] = useState();
+  const [contents, setContents] = useState("");
+  const [birthDay, setBirthDay] = useState("");
+  const [isBirthDay, setIsBirthDay] = useState(false);
 
   const checkUserLink = async () => {
     const querySnapshot = await getDocs(collection(db, "availableID"));
@@ -62,13 +63,29 @@ const Home = ({ userObj }) => {
     const birthDayRef = await collection(db, "birthDay");
     const q = await query(birthDayRef, where("userId", "==", userObj.uid));
     const querySnapshot = await getDocs(q);
-    setBirthDay(querySnapshot.docs[0].data().birthDay);
+
+    if (!querySnapshot.empty) {
+      const birthDayData = await querySnapshot.docs[0].data().birthDay;
+      setBirthDay(birthDayData);
+      //checkBirthDay();
+    }
   };
+  useEffect(() => {
+    const month = new Date().getMonth();
+    const date = new Date().getDate();
+    // const month = 6;
+    // const date = 27;
+    const newBirth = birthDay.split("-");
+    if (month == newBirth[1] && date == newBirth[2]) {
+      setIsBirthDay(true);
+    }
+  }, [birthDay]);
 
   useEffect(() => {
     checkUserLink();
     getMessages();
     getBirthDay();
+
     setLoading(false);
   }, []);
 
@@ -86,14 +103,18 @@ const Home = ({ userObj }) => {
       >
         LogOut
       </button>
-      <div>
-        {contents &&
-          contents.map((data, index) => (
-            <div key={index}>
-              {data.name} / {data.content}
-            </div>
-          ))}
-      </div>
+      {isBirthDay ? (
+        <div>
+          {contents &&
+            contents.map((data, index) => (
+              <div key={index}>
+                {data.name} / {data.content}
+              </div>
+            ))}
+        </div>
+      ) : (
+        <div>not yet</div>
+      )}
     </Container>
   );
 };

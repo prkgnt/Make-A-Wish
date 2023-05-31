@@ -54,27 +54,22 @@ const Home = ({ userObj }) => {
     querySnapshot.forEach((doc) => {
       queryArray.push(doc.data());
     });
-    //console.log(queryArray);
+
     setContents(queryArray);
-    //console.log(contents);
   };
 
   const getBirthDay = async () => {
     const birthDayRef = await collection(db, "birthDay");
     const q = await query(birthDayRef, where("userId", "==", userObj.uid));
     const querySnapshot = await getDocs(q);
-
-    if (!querySnapshot.empty) {
-      const birthDayData = await querySnapshot.docs[0].data().birthDay;
-      setBirthDay(birthDayData);
-      //checkBirthDay();
-    }
+    setBirthDay(querySnapshot.docs[0].data().birthDay);
   };
+
   useEffect(() => {
-    const month = new Date().getMonth();
-    const date = new Date().getDate();
-    // const month = 6;
-    // const date = 27;
+    // const month = new Date().getMonth();
+    // const date = new Date().getDate();
+    const month = 6;
+    const date = 27;
     const newBirth = birthDay.split("-");
     if (month == newBirth[1] && date == newBirth[2]) {
       setIsBirthDay(true);

@@ -1,67 +1,100 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-const Container = styled.div``;
-const Input = styled.input``;
-const SubmitBtn = styled.input``;
+import {
+  FaArrowLeft,
+  FaBars,
+  FaGoogle,
+  FaApple,
+  FaEnvelope,
+} from "react-icons/fa";
+import "bootstrap/dist/css/bootstrap.min.css";
+import SignInEmail from "./SignInEmail";
 
 const Auth = () => {
-  const auth = getAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const onChange = (event) => {
-    //event.target => 이벤트가 일어나는 타겟(객체) 의미
-    const {
-      target: { name, value },
-    } = event;
-    if (name === "email") {
-      setEmail(value);
-    }
-    if (name === "password") {
-      setPassword(value);
-    }
-  };
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const [emailToggle, setEmailToggle] = useState(false);
 
   return (
     <Container>
-      <form onSubmit={onSubmit}>
-        <Input
-          name="email"
-          type="email"
-          placeholder="E-mail"
-          required
-          value={email}
-          onChange={onChange}
-        />
-        <Input
-          name="password"
-          type="password"
-          placeholder="Password"
-          required
-          value={password}
-          onChange={onChange}
-        />
+      <Header>
+        {emailToggle ? (
+          <>
+            <FaArrowLeft
+              onClick={() => {
+                setEmailToggle((prev) => !prev);
+              }}
+            ></FaArrowLeft>
+            <Text>이메일로 로그인</Text>
+          </>
+        ) : (
+          <>
+            <div></div>
+            <Text>시작하기</Text>
+          </>
+        )}
 
-        <SubmitBtn type="submit" value="Log-in" />
-      </form>
-      <Link to="signUp">create new account</Link>
+        <FaBars></FaBars>
+      </Header>
+      {emailToggle ? (
+        <SignInEmail />
+      ) : (
+        <>
+          <Description />
+          <SignInBtn
+            onClick={() => {
+              setEmailToggle((prev) => !prev);
+            }}
+          >
+            <FaEnvelope style={{ position: "relative", left: "-70px" }} />
+            이메일로 시작하기
+          </SignInBtn>
+          <SignInBtn style={{ backgroundColor: "#00C4FF" }}>
+            <FaGoogle style={{ position: "relative", left: "-75px" }} />
+            구글로 시작하기
+          </SignInBtn>
+          <SignInBtn style={{ backgroundColor: "#9BABB8" }}>
+            <FaApple style={{ position: "relative", left: "-75px" }} />
+            애플로 시작하기
+          </SignInBtn>
+        </>
+      )}
     </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+const Text = styled.p``;
+const Description = styled.div`
+  width: 300px;
+  height: 500px;
+  border-radius: 30px;
+  background-color: black;
+`;
+const Header = styled.div`
+  justify-content: space-between;
+  flex-direction: row;
+  display: flex;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  width: 300px;
+  height: 50px;
+  text-align: center;
+  border-bottom: 1px solid black;
+`;
+
+const SignInBtn = styled.button`
+  width: 300px;
+  height: 30px;
+  border-radius: 30px;
+  margin: 10px 10px;
+  border: 0px;
+  background-color: #fca311;
+  font-weight: 600;
+`;
 
 export default Auth;

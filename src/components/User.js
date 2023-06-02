@@ -15,10 +15,6 @@ const Form = styled.form`
   flex-direction: column;
   background-color: aliceblue;
 `;
-const MessageArea = styled.input`
-  width: 200;
-  height: 300;
-`;
 
 const User = () => {
   const [checking, setChecking] = useState(true);

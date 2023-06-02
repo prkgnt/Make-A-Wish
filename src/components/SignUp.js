@@ -6,11 +6,51 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { FaArrowLeft } from "react-icons/fa";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import app from "../firebase";
-const Container = styled.div``;
-const Input = styled.input``;
-const SubmitBtn = styled.input``;
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+const Form = styled.form`
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+`;
+const Text = styled.p`
+  margin: auto 0;
+  font-weight: 600;
+`;
+const Input = styled.input`
+  width: 300px;
+  height: 40px;
+  border-radius: 30px;
+  margin: 10px 10px;
+  padding: 0px 10px;
+`;
+const SubmitBtn = styled.input`
+  width: 300px;
+  height: 40px;
+  border-radius: 30px;
+  margin: 10px 10px;
+  background-color: #fca311;
+  border: 0px;
+  font-weight: 700;
+`;
+const Header = styled.div`
+  justify-content: space-between;
+  flex-direction: row;
+  display: flex;
+  margin-bottom: 20px;
+  width: 300px;
+  height: 50px;
+  text-align: center;
+  border-bottom: 1px solid black;
+`;
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -61,7 +101,18 @@ const Auth = () => {
 
   return (
     <Container>
-      <form onSubmit={onSubmit}>
+      <Header>
+        <FaArrowLeft
+          size={24}
+          style={{ margin: "auto 0" }}
+          onClick={() => {
+            navigate("/");
+          }}
+        />
+        <Text>회원가입</Text>
+        <div style={{ width: 24 }} />
+      </Header>
+      <Form onSubmit={onSubmit}>
         <Input
           name="email"
           type="email"
@@ -94,8 +145,8 @@ const Auth = () => {
           value={birthDay}
           onChange={onChange}
         />
-        <SubmitBtn type="submit" value="Create New Account" />
-      </form>
+        <SubmitBtn type="submit" value="회원가입" />
+      </Form>
     </Container>
   );
 };

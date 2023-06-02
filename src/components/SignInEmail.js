@@ -50,12 +50,9 @@ const SignInEmail = () => {
           value={password}
           onChange={onChange}
         />
-
         <SubmitBtn type="submit" value="로그인" />
       </Form>
-      <SignUpBtn styled={{}} to="signUp">
-        회원가입
-      </SignUpBtn>
+      <SignUpBtn to="signUp">회원가입</SignUpBtn>
     </>
   );
 };
@@ -74,11 +71,12 @@ const Input = styled.input`
 `;
 const SubmitBtn = styled.input`
   width: 300px;
-  height: 30px;
+  height: 40px;
   border-radius: 30px;
   margin: 10px 10px;
   background-color: #fca311;
   border: 0px;
+  font-weight: 700;
 `;
 
 const SignUpBtn = styled(Link)`
@@ -90,7 +88,8 @@ const SignUpBtn = styled(Link)`
   justify-content: center;
   color: white;
   text-decoration-line: none;
-  font-weight: 300;
+  padding-top: 2px;
+  font-weight: 700;
 `;
 
 export default SignInEmail;

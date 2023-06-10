@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppRouter from "./components/Router";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { GlobalStyle } from "./fonts/globalStyle";
 
 function App() {
   const auth = getAuth();
@@ -17,7 +18,12 @@ function App() {
     });
   }, []);
 
-  return <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />;
+  return (
+    <>
+      <GlobalStyle />
+      <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
+    </>
+  );
 }
 
 export default App;

@@ -17,6 +17,7 @@ const Auth = () => {
               style={{ margin: "auto 0" }}
               onClick={() => {
                 setEmailToggle((prev) => !prev);
+                window.scrollTo(0, 0);
               }}
             ></FaArrowLeft>
             <Text>이메일로 로그인</Text>
@@ -37,6 +38,7 @@ const Auth = () => {
           <SignInBtn
             onClick={() => {
               setEmailToggle((prev) => !prev);
+              window.scrollTo(0, 0);
             }}
           >
             <FaEnvelope
@@ -76,8 +78,9 @@ const Auth = () => {
 
 const Container = styled.div`
   display: flex;
+  height: 100vh;
   align-items: center;
-  justify-content: center;
+
   flex-direction: column;
 `;
 const Text = styled.p`

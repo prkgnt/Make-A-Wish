@@ -4,8 +4,10 @@ import Home from "./Home";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import User from "./User";
+import Test from "./GridTest";
 
 const AppRouter = ({ isLoggedIn, userObj }) => {
+  //<Home userObj={userObj} />
   const mainRouter = createBrowserRouter([
     {
       path: "/",

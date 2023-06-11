@@ -27,7 +27,28 @@ const SignInEmail = () => {
         console.log(userCredential);
       })
       .catch((error) => {
-        console.log(error);
+        switch (error.code) {
+          case "auth/invalid-email":
+            alert("형식에 맞게 입력해주세요!");
+            break;
+          case "auth/user-disabled":
+            alert("해당 계정은 비활성화 상태에요!");
+            break;
+          case "auth/user-not-found":
+            alert("해당 이메일은 존재하지 않아요!");
+            break;
+          case "auth/wrong-password":
+            alert("비밀번호가 맞지 않아요!");
+            break;
+          case "auth/network-request-failed":
+            alert("네트워크 연결에 실패했어요!");
+            break;
+          case "auth/too-many-requests":
+            alert("요청이 너무 많아요! 잠시 후 다시 시도해주세요!");
+            break;
+          default:
+            alert("알 수 없는 에러가 발생했어요! 잠시 후 다시 시도해주세요!");
+        }
       });
   };
   return (

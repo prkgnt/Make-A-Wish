@@ -82,7 +82,10 @@ const Auth = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-
+    if (!birthDay) {
+      alert("생일을 입력해주세요!");
+      return;
+    }
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         updateProfile(userCredential.user, {
@@ -95,7 +98,19 @@ const Auth = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            alert("이미 사용중인 이메일 주소에요!");
+            break;
+          case "auth/invalid-email":
+            alert("형식에 맞게 이메일 주소를 입력해주세요!");
+            break;
+          case "auth/weak-password":
+            alert("6자 이상의 비밀번호를 입력해주세요!");
+            break;
+          default:
+            alert("알 수 없는 에러가 발생했어요! 잠시 후 다시 시도해주세요!");
+        }
       });
   };
 
@@ -140,7 +155,6 @@ const Auth = () => {
         <Input
           name="birthday"
           type="date"
-          placeholder="birthday"
           required
           value={birthDay}
           onChange={onChange}

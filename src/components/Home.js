@@ -116,8 +116,8 @@ const Home = ({ userObj }) => {
         linkId: v4,
       });
       setLinkId(v4);
+      alert("링크 생성을 완료했어요!");
     }
-    console.log(`localhost:3000/user/${v4}`);
   };
 
   const getMessages = async () => {
@@ -288,7 +288,7 @@ const Home = ({ userObj }) => {
             </CopyToClipboard>
           ) : (
             <button onClick={makeLink}>
-              <Text>링크 공유하기</Text>
+              <Text>링크 생성하기</Text>
             </button>
           )}
           {isBirthDay ? (

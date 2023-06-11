@@ -15,6 +15,8 @@ import {
 } from "firebase/firestore";
 import app from "../firebase";
 import cakeImg from "../images/cakeImg.png";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const Container = styled.div`
   width: 100%;
@@ -25,7 +27,8 @@ const MainPanel = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
-  background-color: ${(props) => (props.isopen ? "gray" : "white")};
+  background-color: ${(props) =>
+    props.isopen || props.openmsg ? "gray" : "white"};
   transition: background-color 0.3s ease;
 `;
 const MenuBar = styled.div`
@@ -78,7 +81,7 @@ const MessageBox = styled.div`
   width: 300px;
   height: 400px;
   border-radius: 15px;
-  background-color: gray;
+  background-color: white;
 `;
 const Home = ({ userObj }) => {
   const auth = getAuth();
@@ -159,7 +162,7 @@ const Home = ({ userObj }) => {
     <div>loading...</div>
   ) : (
     <Container>
-      <MainPanel isopen={isOpen}>
+      <MainPanel isopen={isOpen} openmsg={openMsg}>
         <Header>
           <div style={{ width: 24, marginLeft: "15px" }} />
           <Text>소원을 말해봐</Text>
@@ -227,13 +230,35 @@ const Home = ({ userObj }) => {
         {openMsg ? (
           <MessagePanel>
             <MessageBox>
-              <AiOutlineClose
-                size={24}
-                style={{ position: "fixed", right: "15px", top: "20px" }}
-                onClick={() => {
-                  setOpenMsg((prev) => !prev);
-                }}
-              />
+              <Swiper spaceBetween={50} slidesPerView={1}>
+                <AiOutlineClose
+                  size={24}
+                  style={{
+                    position: "fixed",
+                    right: "15px",
+                    top: "20px",
+                    zIndex: "99",
+                  }}
+                  onClick={() => {
+                    setOpenMsg((prev) => !prev);
+                  }}
+                />
+                {contents &&
+                  contents.map((data, index) => (
+                    <SwiperSlide key={index}>
+                      <div
+                        style={{
+                          marginTop: "50px",
+                          width: "300px",
+                          height: "350px",
+                          textAlign: "center",
+                        }}
+                      >
+                        {data.name} / {data.content}
+                      </div>
+                    </SwiperSlide>
+                  ))}
+              </Swiper>
             </MessageBox>
           </MessagePanel>
         ) : null}

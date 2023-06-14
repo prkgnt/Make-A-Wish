@@ -15,24 +15,28 @@ import {
 } from "firebase/firestore";
 import app from "../firebase";
 import cakeImg from "../images/cakeImg.png";
+import tableImg from "../images/Group 2.png";
+import candleImg from "../images/candle6.png";
+import candleImg2 from "../images/candle5.png";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
 `;
 const MainPanel = styled.div`
-  height: 100vh;
   width: 100%;
   align-items: center;
   flex-direction: column;
   background-color: ${(props) =>
-    props.isopen || props.openmsg ? "gray" : "white"};
+    props.isopen || props.openmsg ? "#CBAF85" : "#FFDDA9"};
+  background-size: cover;
+  background-repeat: no-repeat;
   transition: background-color 0.3s ease;
 `;
 const MenuBar = styled.div`
   position: absolute;
+  z-index: 2;
   right: -200px;
   top: 0;
   width: ${(props) => (props.isopen ? "200px" : "0px")};
@@ -62,14 +66,17 @@ const Text = styled.p`
   font-family: SingleDays;
   font-size: 25px;
   margin: auto 0;
-  font-weight: 600;
+  font-weight: 400;
+
   white-space: pre-wrap;
 `;
 const ImageBox = styled.div`
   display: flex;
+  flex-direction: column;
   width: 300px;
-  height: 500px;
+  height: 300px;
   align-items: center;
+  transform: translate(0px, 20px);
 `;
 const MessagePanel = styled.div`
   position: absolute;
@@ -213,7 +220,11 @@ const Home = ({ userObj }) => {
                 </Text>
               </div>
               <div
-                style={{ height: "400px", width: "200px", textAlign: "center" }}
+                style={{
+                  height: "400px",
+                  width: "200px",
+                  textAlign: "center",
+                }}
               >
                 <Text
                   style={{ padding: "10px 0px" }}
@@ -272,10 +283,93 @@ const Home = ({ userObj }) => {
             <img
               src={cakeImg}
               style={{
+                zIndex: 1,
                 height: "300px",
                 width: "300px",
               }}
             />
+            <img
+              src={tableImg}
+              style={{
+                transform: "translate(0,-20px)",
+                width: "355px",
+                height: "200px",
+              }}
+            />
+            <div style={{ zIndex: 1 }}>
+              <img
+                src={candleImg}
+                style={{
+                  width: "40px",
+                  height: "100px",
+                  opacity: length > 0 ? 1 : 0,
+                  transform: "translate(70px, -510px)",
+                }}
+              />
+              <img
+                src={candleImg2}
+                style={{
+                  width: "40px",
+                  height: "100px",
+                  opacity: length > 1 ? 1 : 0,
+                  transform: "translate(80px, -510px)",
+                }}
+              />
+              <img
+                src={candleImg}
+                style={{
+                  width: "40px",
+                  height: "100px",
+                  opacity: length > 2 ? 1 : 0,
+                  transform: "translate(90px, -510px)",
+                }}
+              />
+              <img
+                src={candleImg2}
+                style={{
+                  width: "40px",
+                  height: "100px",
+                  opacity: length > 3 ? 1 : 0,
+                  transform: "translate(-100px, -430px)",
+                }}
+              />
+              <img
+                src={candleImg}
+                style={{
+                  width: "40px",
+                  height: "100px",
+                  opacity: length > 4 ? 1 : 0,
+                  transform: "translate(-90px, -430px)",
+                }}
+              />
+              <img
+                src={candleImg2}
+                style={{
+                  width: "40px",
+                  height: "100px",
+                  opacity: length > 5 ? 1 : 0,
+                  transform: "translate(-80px, -430px)",
+                }}
+              />
+              <img
+                src={candleImg}
+                style={{
+                  width: "40px",
+                  height: "100px",
+                  opacity: length > 6 ? 1 : 0,
+                  transform: "translate(-70px, -430px)",
+                }}
+              />
+              <img
+                src={candleImg2}
+                style={{
+                  width: "40px",
+                  height: "100px",
+                  opacity: length > 7 ? 1 : 0,
+                  transform: "translate(100px, -530px)",
+                }}
+              />
+            </div>
           </ImageBox>
           {isUserLink ? (
             <CopyToClipboard
@@ -297,12 +391,6 @@ const Home = ({ userObj }) => {
                 setOpenMsg((prev) => !prev);
               }}
             >
-              {/* {contents &&
-                contents.map((data, index) => (
-                  <div key={index}>
-                    {data.name} / {data.content}
-                  </div>
-                ))} */}
               메세지 확인하기
             </button>
           ) : (

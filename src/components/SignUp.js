@@ -12,13 +12,15 @@ import app from "../firebase";
 
 const Container = styled.div`
   display: flex;
+  height: 100vh;
+  background-color: #ffdda9;
   align-items: center;
-  justify-content: center;
+
   flex-direction: column;
 `;
 const Form = styled.form`
   display: flex;
-  text-align: center;
+  text-align: left;
   flex-direction: column;
 `;
 const Text = styled.p`
@@ -128,6 +130,7 @@ const Auth = () => {
         <div style={{ width: 24 }} />
       </Header>
       <Form onSubmit={onSubmit}>
+        <Text style={{ marginLeft: "10px" }}>이메일 주소 입력</Text>
         <Input
           name="email"
           type="email"
@@ -136,6 +139,7 @@ const Auth = () => {
           value={email}
           onChange={onChange}
         />
+        <Text style={{ marginLeft: "10px" }}>비밀번호 입력</Text>
         <Input
           name="password"
           type="password"
@@ -144,6 +148,7 @@ const Auth = () => {
           value={password}
           onChange={onChange}
         />
+        <Text style={{ marginLeft: "10px" }}>닉네임 입력</Text>
         <Input
           name="nickname"
           type="text"
@@ -152,6 +157,7 @@ const Auth = () => {
           value={nickName}
           onChange={onChange}
         />
+        <Text style={{ marginLeft: "10px" }}>생일 입력</Text>
         <Input
           name="birthday"
           type="date"

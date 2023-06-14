@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FaArrowLeft, FaGoogle, FaApple, FaEnvelope } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignInEmail from "./SignInEmail";
+import background from "../images/Group1.png";
 
 const Auth = () => {
   const [emailToggle, setEmailToggle] = useState(false);
@@ -80,7 +81,7 @@ const Container = styled.div`
   display: flex;
   height: 100vh;
   align-items: center;
-
+  background-color: #ffdda9;
   flex-direction: column;
 `;
 const Text = styled.p`

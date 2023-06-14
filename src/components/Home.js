@@ -41,7 +41,7 @@ const MenuBar = styled.div`
   top: 0;
   width: ${(props) => (props.isopen ? "200px" : "0px")};
   height: 100vh;
-  background-color: white;
+  background-color: #ffdda9;
   transition: transform 0.5s ease;
   transform: translate(${(props) => (props.isopen ? "-200px" : "0px")});
 `;
@@ -67,8 +67,12 @@ const Text = styled.p`
   font-size: 25px;
   margin: auto 0;
   font-weight: 400;
-
   white-space: pre-wrap;
+`;
+const TextBtn = styled(Text)`
+  &:active {
+    opacity: 0.5;
+  }
 `;
 const ImageBox = styled.div`
   display: flex;
@@ -226,14 +230,14 @@ const Home = ({ userObj }) => {
                   textAlign: "center",
                 }}
               >
-                <Text
+                <TextBtn
                   style={{ padding: "10px 0px" }}
                   onClick={() => {
                     signOut(auth);
                   }}
                 >
                   로그아웃
-                </Text>
+                </TextBtn>
               </div>
             </>
           ) : null}
@@ -279,7 +283,7 @@ const Home = ({ userObj }) => {
             <Text>{userObj.displayName} 님의 케이크에</Text>
             <Text>지금까지 {length}개의 초가 밝혀졌어요!</Text>
           </div>
-          <ImageBox>
+          <ImageBox style={{ opacity: isOpen ? 0.6 : 1 }}>
             <img
               src={cakeImg}
               style={{
@@ -373,28 +377,21 @@ const Home = ({ userObj }) => {
           </ImageBox>
           {isUserLink ? (
             <CopyToClipboard
+              style={{ zIndex: 1, transform: "translate(0px,-40px)" }}
               text={`localhost:3000/user/${linkId}`}
               onCopy={() => {
                 alert("복사완료!");
               }}
             >
-              <Text>링크 복사하기</Text>
+              <TextBtn>링크 복사하기!</TextBtn>
             </CopyToClipboard>
           ) : (
-            <button onClick={makeLink}>
-              <Text>링크 생성하기</Text>
-            </button>
-          )}
-          {isBirthDay ? (
-            <button
-              onClick={() => {
-                setOpenMsg((prev) => !prev);
-              }}
+            <TextBtn
+              style={{ zIndex: 1, transform: "translate(0px,-40px)" }}
+              onClick={makeLink}
             >
-              메세지 확인하기
-            </button>
-          ) : (
-            <div>not yet</div>
+              링크 생성하기!
+            </TextBtn>
           )}
         </ContentBox>
       </MainPanel>

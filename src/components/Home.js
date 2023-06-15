@@ -18,8 +18,11 @@ import cakeImg from "../images/cakeImg.png";
 import tableImg from "../images/Group 2.png";
 import candleImg from "../images/candle6.png";
 import candleImg2 from "../images/candle5.png";
-import "swiper/css";
+import "swiper/css/bundle";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Pagination } from "swiper";
+
+SwiperCore.use([Pagination]);
 
 const Container = styled.div`
   width: 100%;
@@ -41,7 +44,7 @@ const MenuBar = styled.div`
   top: 0;
   width: ${(props) => (props.isopen ? "200px" : "0px")};
   height: 100vh;
-  background-color: #ffdda9;
+  background-color: white;
   transition: transform 0.5s ease;
   transform: translate(${(props) => (props.isopen ? "-200px" : "0px")});
 `;
@@ -82,17 +85,11 @@ const ImageBox = styled.div`
   align-items: center;
   transform: translate(0px, 20px);
 `;
-const MessagePanel = styled.div`
-  position: absolute;
-  margin: 30px 0px;
-  left: 50%;
-  transform: translate(-50%);
-`;
 const MessageBox = styled.div`
+  margin-top: 70px;
   width: 300px;
-  height: 400px;
-  border-radius: 15px;
-  background-color: white;
+  height: 350px;
+  text-align: center;
 `;
 const Home = ({ userObj }) => {
   const auth = getAuth();
@@ -106,6 +103,7 @@ const Home = ({ userObj }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [length, setLength] = useState(0);
   const [openMsg, setOpenMsg] = useState(false);
+  const [leftDay, setLeftDay] = useState(100);
 
   const checkUserLink = async () => {
     const querySnapshot = await getDocs(collection(db, "availableID"));
@@ -152,13 +150,18 @@ const Home = ({ userObj }) => {
   };
 
   useEffect(() => {
-    // const month = new Date().getMonth();
-    // const date = new Date().getDate();
+    //const month = new Date().getMonth() + 1;
+    //const date = new Date().getDate();
     const month = 6;
     const date = 27;
-    const newBirth = birthDay.split("-");
-    if (month == newBirth[1] && date == newBirth[2]) {
+    const strBirth = birthDay.split("-");
+    console.log(month, date, strBirth[1], strBirth[2]);
+    if (month == strBirth[1] && date == strBirth[2]) {
       setIsBirthDay(true);
+    } else if (month == strBirth[1] && date < strBirth[2]) {
+      setLeftDay(strBirth[2] - date);
+    } else {
+      setLeftDay(100);
     }
   }, [birthDay]);
 
@@ -242,49 +245,67 @@ const Home = ({ userObj }) => {
             </>
           ) : null}
         </MenuBar>
-        {openMsg ? (
-          <MessagePanel>
-            <MessageBox>
-              <Swiper spaceBetween={50} slidesPerView={1}>
-                <AiOutlineClose
-                  size={24}
-                  style={{
-                    position: "fixed",
-                    right: "15px",
-                    top: "20px",
-                    zIndex: "99",
-                  }}
-                  onClick={() => {
-                    setOpenMsg((prev) => !prev);
-                  }}
-                />
-                {contents &&
-                  contents.map((data, index) => (
-                    <SwiperSlide key={index}>
-                      <div
-                        style={{
-                          marginTop: "50px",
-                          width: "300px",
-                          height: "350px",
-                          textAlign: "center",
-                        }}
-                      >
-                        {data.name} / {data.content}
-                      </div>
-                    </SwiperSlide>
-                  ))}
-              </Swiper>
-            </MessageBox>
-          </MessagePanel>
+        {openMsg && isBirthDay ? (
+          <Swiper
+            style={{
+              width: "300px",
+              height: "400px",
+              position: "absolute",
+              margin: "30px 0px",
+              left: "50%",
+              transform: "translate(-50%)",
+              backgroundColor: "white",
+              borderRadius: "15px",
+              border: "5px dotted #A3885F",
+            }}
+            spaceBetween={50}
+            slidesPerView={1}
+            pagination={{ clickable: true }}
+          >
+            <AiOutlineClose
+              size={24}
+              style={{
+                position: "fixed",
+                right: "15px",
+                top: "20px",
+                zIndex: "99",
+              }}
+              onClick={() => {
+                setOpenMsg((prev) => !prev);
+              }}
+            />
+            {contents &&
+              contents.map((data, index) => (
+                <SwiperSlide key={index}>
+                  <MessageBox>
+                    <Text>{data.content}</Text>
+                    <Text style={{ transform: "translate(70px,210px)" }}>
+                      {" "}
+                      by {data.name}
+                    </Text>
+                  </MessageBox>
+                </SwiperSlide>
+              ))}
+          </Swiper>
         ) : null}
-
         <ContentBox>
           <div style={{ textAlign: "left" }}>
             <Text>{userObj.displayName} 님의 케이크에</Text>
             <Text>지금까지 {length}개의 초가 밝혀졌어요!</Text>
           </div>
-          <ImageBox style={{ opacity: isOpen ? 0.6 : 1 }}>
+          <ImageBox style={{ opacity: isOpen || openMsg ? 0.6 : 1 }}>
             <img
+              onClick={() => {
+                if (!isBirthDay) {
+                  alert(
+                    `아직 생일이 ${
+                      leftDay == 100 ? "많이" : `${leftDay}일`
+                    } 남았어요!`
+                  );
+                } else {
+                  setOpenMsg((prev) => !prev);
+                }
+              }}
               src={cakeImg}
               style={{
                 zIndex: 1,
@@ -400,3 +421,11 @@ const Home = ({ userObj }) => {
 };
 
 export default Home;
+{
+  /* {contents &&
+    contents.map((data, index) => (
+      <div key={index}>
+        {data.name} / {data.content}
+      </div>
+    ))} */
+}

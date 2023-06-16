@@ -15,7 +15,6 @@ const Container = styled.div`
   height: 100vh;
   background-color: #ffdda9;
   align-items: center;
-
   flex-direction: column;
 `;
 const Form = styled.form`

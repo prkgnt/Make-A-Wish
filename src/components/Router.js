@@ -19,7 +19,7 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
     },
     {
       path: "/user/:linkId",
-      element: <User />,
+      element: <User userObj={userObj} />,
     },
   ]);
   return <RouterProvider router={mainRouter} />;

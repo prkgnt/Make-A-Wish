@@ -85,6 +85,11 @@ const ImageBox = styled.div`
   align-items: center;
   transform: translate(0px, 20px);
 `;
+const CakeImg = styled.img`
+  &:active {
+    opacity: 0.8;
+  }
+`;
 const MessageBox = styled.div`
   margin-top: 70px;
   width: 300px;
@@ -150,10 +155,10 @@ const Home = ({ userObj }) => {
   };
 
   useEffect(() => {
-    //const month = new Date().getMonth() + 1;
-    //const date = new Date().getDate();
-    const month = 6;
-    const date = 27;
+    const month = new Date().getMonth() + 1;
+    const date = new Date().getDate();
+    //const month = 6;
+    //const date = 27;
     const strBirth = birthDay.split("-");
     console.log(month, date, strBirth[1], strBirth[2]);
     if (month == strBirth[1] && date == strBirth[2]) {
@@ -294,7 +299,7 @@ const Home = ({ userObj }) => {
             <Text>지금까지 {length}개의 초가 밝혀졌어요!</Text>
           </div>
           <ImageBox style={{ opacity: isOpen || openMsg ? 0.6 : 1 }}>
-            <img
+            <CakeImg
               onClick={() => {
                 if (!isBirthDay) {
                   alert(
@@ -421,11 +426,3 @@ const Home = ({ userObj }) => {
 };
 
 export default Home;
-{
-  /* {contents &&
-    contents.map((data, index) => (
-      <div key={index}>
-        {data.name} / {data.content}
-      </div>
-    ))} */
-}

@@ -123,14 +123,16 @@ const Home = ({ userObj }) => {
   const makeLink = async () => {
     const v4 = uuidv4();
     if (isUserLink) {
-      alert("alreay exist");
+      alert("이미 링크가 존재합니다!");
     } else {
       const docRef = await addDoc(collection(db, "availableID"), {
         userId: userObj.uid,
         linkId: v4,
+        userName: userObj.displayName,
       });
       setLinkId(v4);
       alert("링크 생성을 완료했어요!");
+      setIsUserLink(true);
     }
   };
 

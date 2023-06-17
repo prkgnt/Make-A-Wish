@@ -49,27 +49,7 @@ const Auth = () => {
                 top: "-2px",
               }}
             />
-            이메일로 시작하기
-          </SignInBtn>
-          <SignInBtn style={{ backgroundColor: "#00C4FF" }}>
-            <FaGoogle
-              style={{
-                position: "relative",
-                left: "-75px",
-                top: "-2px",
-              }}
-            />
-            구글로 시작하기
-          </SignInBtn>
-          <SignInBtn style={{ backgroundColor: "#9BABB8" }}>
-            <FaApple
-              style={{
-                position: "relative",
-                left: "-75px",
-                top: "-2px",
-              }}
-            />
-            애플로 시작하기
+            시작하기!!
           </SignInBtn>
         </>
       )}

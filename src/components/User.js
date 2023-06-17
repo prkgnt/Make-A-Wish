@@ -9,13 +9,16 @@ import app from "../firebase";
 const Container = styled.div`
   width: 100%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  align-items: center;
   background-color: #ffdda9;
+  padding-top: 20px;
 `;
 const Form = styled.form`
   width: 300px;
   height: 400px;
-  padding: 10px 100px;
 `;
 const InputBox = styled.input`
   margin: 15px 15px;
@@ -24,6 +27,7 @@ const InputBox = styled.input`
   border: 0px;
   padding: 0px 10px;
   border-radius: 8px;
+  transform: translate(25px, 0px);
 `;
 const TextArea = styled.textarea`
   padding: 20px 20px;
@@ -41,21 +45,20 @@ const Btn = styled.input`
   background-color: #fca311;
   border: 0px;
   font-weight: 700;
-  transform: translate(50px, 0px);
 `;
 const Text = styled.p`
   font-family: SingleDays;
   font-size: 25px;
-  margin: auto 0;
   padding: 15px 0px;
   font-weight: 400;
   white-space: pre-wrap;
 `;
 
-const User = ({ userObj }) => {
+const User = () => {
   const [checking, setChecking] = useState(true);
   const [availableLink, setAvailableLink] = useState(false);
   const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState("");
   const [nickName, setNickName] = useState("");
   const [content, setContent] = useState("");
   const db = getFirestore(app);
@@ -69,8 +72,8 @@ const User = ({ userObj }) => {
       if (linkId === doc.data().linkId) {
         console.log(linkId);
         setUserId(doc.data().userId);
+        setUserName(doc.data().userName);
         setAvailableLink(true);
-        console.log(availableLink);
       } else {
         //setAvailableLink(false);
       }
@@ -112,7 +115,7 @@ const User = ({ userObj }) => {
     <div>checking..</div>
   ) : availableLink ? (
     <Container>
-      <Text>{userObj.displayName}님에게 메세지를 남겨주세요!</Text>
+      <Text>{userName} 님에게 메세지를 남겨주세요!</Text>
       <Form onSubmit={onSubmit}>
         <TextArea
           cols="50"
@@ -124,7 +127,7 @@ const User = ({ userObj }) => {
           required
         />
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <Text>By. </Text>
+          <Text style={{ transform: "translate(25px, 0px)" }}>By. </Text>
           <InputBox
             name="name"
             type="text"

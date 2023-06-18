@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/Make-A-Wish/static/css/main.d48aea72.css",
+    "main.js": "/Make-A-Wish/static/js/main.df198059.js",
+    "static/media/SingleDay-Regular.ttf": "/Make-A-Wish/static/media/SingleDay-Regular.b78b535a0525794dd2ad.ttf",
+    "static/media/Group 7.png": "/Make-A-Wish/static/media/Group 7.359f9ca322927ec8c1bc.png",
+    "static/media/cakeImg.png": "/Make-A-Wish/static/media/cakeImg.46c8d6d65fd319fdda02.png",
+    "static/media/candle5.png": "/Make-A-Wish/static/media/candle5.d72d992f7f832864d7a3.png",
+    "static/media/candle6.png": "/Make-A-Wish/static/media/candle6.7bcd3a7a967507367140.png",
+    "index.html": "/Make-A-Wish/index.html",
+    "main.d48aea72.css.map": "/Make-A-Wish/static/css/main.d48aea72.css.map",
+    "main.df198059.js.map": "/Make-A-Wish/static/js/main.df198059.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d48aea72.css",
+    "static/js/main.df198059.js"
+  ]
+}

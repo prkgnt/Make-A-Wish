@@ -446,7 +446,7 @@ const Home = ({ userObj }) => {
           {isUserLink ? (
             <CopyToClipboard
               style={{ zIndex: 1, transform: "translate(0px,-40px)" }}
-              text={`https://prkgnt.github.io/#/Make-A-Wish/user/${linkId}`}
+              text={`https://prkgnt.github.io/Make-A-Wish/#/user/${linkId}`}
               onCopy={() => {
                 alert("복사완료!");
               }}

@@ -185,12 +185,10 @@ const Home = ({ userObj }) => {
   };
 
   useEffect(() => {
-    //const month = new Date().getMonth() + 1;
-    //const date = new Date().getDate();
-    const month = 6;
-    const date = 27;
+    const month = new Date().getMonth() + 1;
+    const date = new Date().getDate();
     const strBirth = birthDay.split("-");
-    console.log(month, date, strBirth[1], strBirth[2]);
+
     if (month == strBirth[1] && date == strBirth[2]) {
       setIsBirthDay(true);
     } else if (month == strBirth[1] && date < strBirth[2]) {

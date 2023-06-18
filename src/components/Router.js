@@ -7,20 +7,25 @@ import User from "./User";
 
 const AppRouter = ({ isLoggedIn, userObj }) => {
   //<Home userObj={userObj} />
-  const mainRouter = createBrowserRouter([
+  const mainRouter = createBrowserRouter(
+    [
+      {
+        path: "/",
+        element: isLoggedIn ? <Home userObj={userObj} /> : <SignIn />,
+      },
+      {
+        path: "/signUp",
+        element: <SignUp />,
+      },
+      {
+        path: "/user/:linkId",
+        element: <User userObj={userObj} />,
+      },
+    ],
     {
-      path: "/",
-      element: isLoggedIn ? <Home userObj={userObj} /> : <SignIn />,
-    },
-    {
-      path: "/signUp",
-      element: <SignUp />,
-    },
-    {
-      path: "/user/:linkId",
-      element: <User userObj={userObj} />,
-    },
-  ]);
+      basename: "/Make-A-Wish",
+    }
+  );
   return <RouterProvider router={mainRouter} />;
 };
 

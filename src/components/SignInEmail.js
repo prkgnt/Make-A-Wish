@@ -23,9 +23,7 @@ const SignInEmail = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-      })
+      .then((userCredential) => {})
       .catch((error) => {
         switch (error.code) {
           case "auth/invalid-email":

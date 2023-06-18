@@ -23,6 +23,7 @@ const Form = styled.form`
   flex-direction: column;
 `;
 const Text = styled.p`
+  font-family: SingleDays;
   margin: auto 0;
   font-weight: 600;
 `;
@@ -41,11 +42,14 @@ const SubmitBtn = styled.input`
   background-color: #fca311;
   border: 0px;
   font-weight: 700;
+  font-family: SingleDays;
+  color: black;
 `;
 const Header = styled.div`
   justify-content: space-between;
   flex-direction: row;
   display: flex;
+  margin-top: 10px;
   margin-bottom: 20px;
   width: 300px;
   height: 50px;
@@ -125,7 +129,7 @@ const Auth = () => {
             navigate("/");
           }}
         />
-        <Text>회원가입</Text>
+        <Text style={{ fontSize: "22px" }}>회원가입</Text>
         <div style={{ width: 24 }} />
       </Header>
       <Form onSubmit={onSubmit}>

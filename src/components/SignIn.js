@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FaArrowLeft, FaGoogle, FaApple, FaEnvelope } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignInEmail from "./SignInEmail";
-import background from "../images/Group1.png";
+import DescriptionImage from "../images/Group 7.png";
 
 const Auth = () => {
   const [emailToggle, setEmailToggle] = useState(false);
@@ -21,7 +21,7 @@ const Auth = () => {
                 window.scrollTo(0, 0);
               }}
             ></FaArrowLeft>
-            <Text>이메일로 로그인</Text>
+            <Text style={{ fontSize: "22px" }}>이메일로 로그인</Text>
           </>
         ) : (
           <>
@@ -35,21 +35,23 @@ const Auth = () => {
         <SignInEmail />
       ) : (
         <>
-          <Description />
+          <Description src={DescriptionImage} />
           <SignInBtn
             onClick={() => {
               setEmailToggle((prev) => !prev);
               window.scrollTo(0, 0);
             }}
           >
-            <FaEnvelope
+            <FaEnvelope style={{ transform: "translate(-120px, 11px)" }} />
+            <div
               style={{
-                position: "relative",
-                left: "-68px",
-                top: "-2px",
+                fontFamily: "SingleDays",
+                fontSize: "18px",
+                transform: "translate(10px, -13px)",
               }}
-            />
-            시작하기!!
+            >
+              이메일로 시작하기!
+            </div>
           </SignInBtn>
         </>
       )}
@@ -65,19 +67,21 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const Text = styled.p`
+  font-family: SingleDays;
+  font-size: 24px;
   margin: auto 0;
   font-weight: 600;
 `;
-const Description = styled.div`
+const Description = styled.img`
   width: 300px;
   height: 500px;
   border-radius: 30px;
-  background-color: black;
 `;
 const Header = styled.div`
   justify-content: space-between;
   flex-direction: row;
   display: flex;
+  margin-top: 10px;
   margin-bottom: 20px;
   width: 300px;
   height: 50px;
@@ -88,7 +92,7 @@ const SignInBtn = styled.button`
   width: 300px;
   height: 50px;
   border-radius: 30px;
-  margin: 10px 10px;
+  margin: 30px 10px;
   border: 0px;
   background-color: #fca311;
   font-weight: 600;

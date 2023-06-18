@@ -21,20 +21,21 @@ import candleImg2 from "../images/candle5.png";
 import "swiper/css/bundle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination } from "swiper";
+import background from "../images/iPhone 13 mini - 1.png";
 
 SwiperCore.use([Pagination]);
 
 const Container = styled.div`
   width: 100%;
+  height: 100vh;
 `;
 const MainPanel = styled.div`
   width: 100%;
+  height: 100vh;
   align-items: center;
   flex-direction: column;
   background-color: ${(props) =>
-    props.isopen || props.openmsg ? "#CBAF85" : "#FFDDA9"};
-  background-size: cover;
-  background-repeat: no-repeat;
+    props.isopen || props.openmsg ? "#262020" : "#403A3A"};
   transition: background-color 0.3s ease;
 `;
 const MenuBar = styled.div`
@@ -56,6 +57,7 @@ const ContentBox = styled.div`
   text-align: center;
   align-items: center;
   justify-content: center;
+  opacity: ${(props) => (props.isopen ? 0.5 : 1)};
 `;
 const Header = styled.div`
   justify-content: space-between;
@@ -64,6 +66,7 @@ const Header = styled.div`
   height: 60px;
   text-align: center;
   border-bottom: 1px solid black;
+  opacity: ${(props) => (props.isopen || props.openmsg ? 0.5 : 1)};
 `;
 const Text = styled.p`
   font-family: SingleDays;
@@ -71,8 +74,14 @@ const Text = styled.p`
   margin: auto 0;
   font-weight: 400;
   white-space: pre-wrap;
+  color: white;
 `;
 const TextBtn = styled(Text)`
+  background-color: #ffb800;
+  color: black;
+  padding: 5px 15px;
+  border-radius: 15px;
+  opacity: ${(props) => (props.openmsg ? 0.5 : 1)};
   &:active {
     opacity: 0.5;
   }
@@ -92,9 +101,28 @@ const CakeImg = styled.img`
 `;
 const MessageBox = styled.div`
   margin-top: 70px;
+  padding: 15px 15px;
   width: 300px;
   height: 350px;
   text-align: center;
+`;
+const Circle1 = styled.div`
+  position: absolute;
+  width: 100px;
+  height: 200px;
+  right: 0;
+  top: 180px;
+  border-radius: 150px 0px 0px 150px;
+  background: rgba(255, 122, 0, 0.2);
+`;
+const Circle2 = styled.div`
+  position: absolute;
+  width: 247px;
+  height: 247px;
+  left: -91px;
+  top: 493px;
+  border-radius: 123.5px;
+  background: rgba(217, 217, 217, 0.4);
 `;
 const Home = ({ userObj }) => {
   const auth = getAuth();
@@ -157,10 +185,10 @@ const Home = ({ userObj }) => {
   };
 
   useEffect(() => {
-    const month = new Date().getMonth() + 1;
-    const date = new Date().getDate();
-    //const month = 6;
-    //const date = 27;
+    //const month = new Date().getMonth() + 1;
+    //const date = new Date().getDate();
+    const month = 6;
+    const date = 27;
     const strBirth = birthDay.split("-");
     console.log(month, date, strBirth[1], strBirth[2]);
     if (month == strBirth[1] && date == strBirth[2]) {
@@ -183,12 +211,15 @@ const Home = ({ userObj }) => {
     <div>loading...</div>
   ) : (
     <Container>
-      <MainPanel isopen={isOpen} openmsg={openMsg}>
-        <Header>
+      <Circle1></Circle1>
+      <Circle2></Circle2>
+      <MainPanel isopen={isOpen} openmsg={openMsg} background={background}>
+        <Header isopen={isOpen} openmsg={openMsg}>
           <div style={{ width: 24, marginLeft: "15px" }} />
           <Text>소원을 말해봐</Text>
           <FaBars
             size={24}
+            color="white"
             style={{ margin: "auto 15" }}
             onClick={() => {
               setIsOpen((prev) => !prev);
@@ -222,6 +253,7 @@ const Home = ({ userObj }) => {
                 />
                 <Text
                   style={{
+                    color: "black",
                     fontSize: "20px",
                     position: "fixed",
                     top: "72px",
@@ -241,7 +273,11 @@ const Home = ({ userObj }) => {
                 }}
               >
                 <TextBtn
-                  style={{ padding: "10px 0px" }}
+                  style={{
+                    padding: "20px 0px",
+                    backgroundColor: "white",
+                    color: "black",
+                  }}
                   onClick={() => {
                     signOut(auth);
                   }}
@@ -263,7 +299,8 @@ const Home = ({ userObj }) => {
               transform: "translate(-50%)",
               backgroundColor: "white",
               borderRadius: "15px",
-              border: "5px dotted #A3885F",
+              outline: "5px dotted #a3885f",
+              outlineOffset: "-10px",
             }}
             spaceBetween={50}
             slidesPerView={1}
@@ -285,8 +322,13 @@ const Home = ({ userObj }) => {
               contents.map((data, index) => (
                 <SwiperSlide key={index}>
                   <MessageBox>
-                    <Text>{data.content}</Text>
-                    <Text style={{ transform: "translate(70px,210px)" }}>
+                    <Text style={{ color: "black" }}>{data.content}</Text>
+                    <Text
+                      style={{
+                        transform: "translate(70px,210px)",
+                        color: "black",
+                      }}
+                    >
                       {" "}
                       by {data.name}
                     </Text>
@@ -295,7 +337,7 @@ const Home = ({ userObj }) => {
               ))}
           </Swiper>
         ) : null}
-        <ContentBox>
+        <ContentBox isopen={isOpen}>
           <div style={{ textAlign: "left" }}>
             <Text>{userObj.displayName} 님의 케이크에</Text>
             <Text>지금까지 {length}개의 초가 밝혀졌어요!</Text>
@@ -411,10 +453,11 @@ const Home = ({ userObj }) => {
                 alert("복사완료!");
               }}
             >
-              <TextBtn>링크 복사하기!</TextBtn>
+              <TextBtn openmsg={openMsg}>링크 복사하기!</TextBtn>
             </CopyToClipboard>
           ) : (
             <TextBtn
+              openmsg={openMsg}
               style={{ zIndex: 1, transform: "translate(0px,-40px)" }}
               onClick={makeLink}
             >

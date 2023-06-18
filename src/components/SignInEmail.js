@@ -97,6 +97,9 @@ const SubmitBtn = styled.input`
   background-color: #fca311;
   border: 0px;
   font-weight: 700;
+  font-size: 18px;
+  font-family: SingleDays;
+  color: white;
 `;
 
 const SignUpBtn = styled(Link)`
@@ -110,6 +113,8 @@ const SignUpBtn = styled(Link)`
   text-decoration-line: none;
   padding-top: 2px;
   font-weight: 700;
+  font-family: SingleDays;
+  color: white;
 `;
 
 export default SignInEmail;

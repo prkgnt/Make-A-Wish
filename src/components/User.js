@@ -17,6 +17,7 @@ const Container = styled.div`
   padding-top: 20px;
 `;
 const Form = styled.form`
+  z-index: 1;
   width: 300px;
   height: 400px;
 `;
@@ -38,13 +39,14 @@ const TextArea = styled.textarea`
   border-radius: 15px;
 `;
 const Btn = styled.input`
+  font-family: SingleDays;
+  font-size: 20px;
   width: 200px;
   height: 40px;
   border-radius: 30px;
   margin: 10px 10px;
   background-color: #fca311;
   border: 0px;
-  font-weight: 700;
 `;
 const Text = styled.p`
   font-family: SingleDays;
@@ -53,7 +55,24 @@ const Text = styled.p`
   font-weight: 400;
   white-space: pre-wrap;
 `;
-
+const Circle1 = styled.div`
+  position: absolute;
+  width: 100px;
+  height: 200px;
+  right: 0;
+  top: 180px;
+  border-radius: 150px 0px 0px 150px;
+  background: rgba(255, 122, 0, 0.2);
+`;
+const Circle2 = styled.div`
+  position: absolute;
+  width: 247px;
+  height: 247px;
+  left: -91px;
+  top: 493px;
+  border-radius: 123.5px;
+  background: rgba(217, 217, 217, 0.4);
+`;
 const User = () => {
   const [checking, setChecking] = useState(true);
   const [availableLink, setAvailableLink] = useState(false);
@@ -115,14 +134,16 @@ const User = () => {
     <div>checking..</div>
   ) : availableLink ? (
     <Container>
+      <Circle1></Circle1>
+      <Circle2></Circle2>
       <Text>{userName} 님에게 메세지를 남겨주세요!</Text>
       <Form onSubmit={onSubmit}>
         <TextArea
           cols="50"
           rows="10"
           name="message"
-          placeholder="여기에 메세지를 남겨주세요! (최대 150자.)"
-          maxLength="150"
+          placeholder="여기에 메세지를 남겨주세요! (최대 100자.)"
+          maxLength="100"
           onChange={onChange}
           required
         />
@@ -137,7 +158,7 @@ const User = () => {
             required
           />
         </div>
-        <Btn type="submit" value="Send" />
+        <Btn type="submit" value="메세지 전달" />
       </Form>
     </Container>
   ) : (

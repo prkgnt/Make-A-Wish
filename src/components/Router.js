@@ -1,13 +1,12 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import Home from "./Home";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import User from "./User";
 
 const AppRouter = ({ isLoggedIn, userObj }) => {
-  //<Home userObj={userObj} />
-  const mainRouter = createBrowserRouter(
+  const mainRouter = createHashRouter(
     [
       {
         path: "/",

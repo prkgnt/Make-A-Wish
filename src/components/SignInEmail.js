@@ -90,6 +90,7 @@ const Input = styled.input`
   padding: 0px 10px;
 `;
 const SubmitBtn = styled.input`
+  z-index: 1;
   width: 300px;
   height: 40px;
   border-radius: 30px;
@@ -103,6 +104,7 @@ const SubmitBtn = styled.input`
 `;
 
 const SignUpBtn = styled(Link)`
+  z-index: 1;
   width: 300px;
   height: 30px;
   border-radius: 30px;

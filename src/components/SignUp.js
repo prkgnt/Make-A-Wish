@@ -28,6 +28,7 @@ const Text = styled.p`
   font-weight: 600;
 `;
 const Input = styled.input`
+  z-index: 1;
   width: 300px;
   height: 40px;
   border-radius: 30px;
@@ -55,6 +56,24 @@ const Header = styled.div`
   height: 50px;
   text-align: center;
   border-bottom: 1px solid black;
+`;
+const Circle1 = styled.div`
+  position: absolute;
+  width: 100px;
+  height: 200px;
+  right: 0;
+  top: 180px;
+  border-radius: 150px 0px 0px 150px;
+  background: rgba(255, 122, 0, 0.2);
+`;
+const Circle2 = styled.div`
+  position: absolute;
+  width: 247px;
+  height: 247px;
+  left: -91px;
+  top: 493px;
+  border-radius: 123.5px;
+  background: rgba(217, 217, 217, 0.4);
 `;
 
 const Auth = () => {
@@ -121,6 +140,8 @@ const Auth = () => {
 
   return (
     <Container>
+      <Circle1></Circle1>
+      <Circle2></Circle2>
       <Header>
         <FaArrowLeft
           size={24}

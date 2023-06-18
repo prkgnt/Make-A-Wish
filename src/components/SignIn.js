@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { FaArrowLeft, FaGoogle, FaApple, FaEnvelope } from "react-icons/fa";
+import { FaArrowLeft, FaEnvelope } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignInEmail from "./SignInEmail";
 import DescriptionImage from "../images/Group 7.png";
@@ -10,6 +10,8 @@ const Auth = () => {
 
   return (
     <Container>
+      <Circle1></Circle1>
+      <Circle2></Circle2>
       <Header>
         {emailToggle ? (
           <>
@@ -73,6 +75,7 @@ const Text = styled.p`
   font-weight: 600;
 `;
 const Description = styled.img`
+  z-index: 1;
   width: 300px;
   height: 500px;
   border-radius: 30px;
@@ -97,6 +100,25 @@ const SignInBtn = styled.button`
   background-color: #fca311;
   font-weight: 600;
   color: black;
+  z-index: 1;
+`;
+const Circle1 = styled.div`
+  position: absolute;
+  width: 100px;
+  height: 200px;
+  right: 0;
+  top: 180px;
+  border-radius: 150px 0px 0px 150px;
+  background: rgba(255, 122, 0, 0.2);
+`;
+const Circle2 = styled.div`
+  position: absolute;
+  width: 247px;
+  height: 247px;
+  left: -91px;
+  top: 493px;
+  border-radius: 123.5px;
+  background: rgba(217, 217, 217, 0.4);
 `;
 
 export default Auth;

@@ -158,6 +158,9 @@ const User = () => {
           />
         </div>
         <Btn type="submit" value="메세지 전달" />
+        <Text style={{ fontSize: "15px" }}>
+          남긴 메세지는 {userName}님의 생일에 공개돼요!
+        </Text>
       </Form>
     </Container>
   ) : (
